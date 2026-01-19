@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rendering.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsevigen <bsevigen@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/19 20:38:49 by bsevigen          #+#    #+#             */
+/*   Updated: 2026/01/19 20:38:49 by bsevigen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 static void	put_pixel(t_img *img, int x, int y, int color)
@@ -5,13 +17,12 @@ static void	put_pixel(t_img *img, int x, int y, int color)
 	char	*pixel;
 
 	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
-		return;
+		return ;
 	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
 	*(unsigned int *)pixel = color;
 }
 
-static void	pixel_to_complex(int x, int y, t_fractol *f,
-							double *re, double *im)
+static void	pixel_to_complex(int x, int y, t_fractol *f, double *re, double *im)
 {
 	*re = (x - WIDTH / 2.0) / (0.5 * f->zoom * WIDTH) + f->shift_x;
 	*im = (y - HEIGHT / 2.0) / (0.5 * f->zoom * HEIGHT) + f->shift_y;

@@ -5,7 +5,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC = main.c \
       init.c rendering.c mandelbrot.c julia.c \
-      hooks.c coloring.c error.c libft_utils.c
+      hooks.c coloring.c error.c libft_utils.c \
+	  utils.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsevigen <bsevigen@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/19 20:09:54 by bsevigen          #+#    #+#             */
+/*   Updated: 2026/01/19 20:09:54 by bsevigen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 void	ft_bzero(void *s, size_t n)
@@ -45,6 +57,19 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
+static double	parse_digits(const char **s)
+{
+	double	n;
+
+	n = 0.0;
+	while (**s >= '0' && **s <= '9')
+	{
+		n = n * 10.0 + (**s - '0');
+		(*s)++;
+	}
+	return (n);
+}
+
 double	ft_atod(const char *s)
 {
 	double	result;
@@ -64,21 +89,13 @@ double	ft_atod(const char *s)
 			sign = -1;
 		s++;
 	}
-	while (*s >= '0' && *s <= '9')
-	{
-		result = result * 10.0 + (*s - '0');
-		s++;
-	}
+	result = parse_digits(&s);
 	if (*s == '.')
 	{
 		s++;
-		while (*s >= '0' && *s <= '9')
-		{
-			frac = frac * 10.0 + (*s - '0');
+		frac = parse_digits(&s);
+		while (frac >= div)
 			div *= 10.0;
-			s++;
-		}
 	}
-
 	return (sign * (result + frac / div));
 }

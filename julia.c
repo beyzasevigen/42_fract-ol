@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   julia.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsevigen <bsevigen@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/19 20:08:54 by bsevigen          #+#    #+#             */
+/*   Updated: 2026/01/19 20:08:54 by bsevigen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 int	julia(double x, double y, t_fractol *f)
@@ -16,7 +28,7 @@ int	julia(double x, double y, t_fractol *f)
 		z_im = 2.0 * z_re * z_im + f->julia_im;
 		z_re = tmp;
 		if (z_re * z_re + z_im * z_im > 4.0)
-			break;
+			break ;
 		i++;
 	}
 	return (i);

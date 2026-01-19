@@ -1,23 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsevigen <bsevigen@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/01/19 20:07:32 by bsevigen          #+#    #+#             */
+/*   Updated: 2026/01/19 20:07:32 by bsevigen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
-
-static void	zoom_at_point(t_fractol *f, int x, int y, double factor)
-{
-	double	before_re;
-	double	before_im;
-	double	after_re;
-	double	after_im;
-
-	before_re = (x - WIDTH / 2.0) / (0.5 * f->zoom * WIDTH) + f->shift_x;
-	before_im = (y - HEIGHT / 2.0) / (0.5 * f->zoom * HEIGHT) + f->shift_y;
-
-	f->zoom *= factor;
-
-	after_re = (x - WIDTH / 2.0) / (0.5 * f->zoom * WIDTH) + f->shift_x;
-	after_im = (y - HEIGHT / 2.0) / (0.5 * f->zoom * HEIGHT) + f->shift_y;
-
-	f->shift_x += before_re - after_re;
-	f->shift_y += before_im - after_im;
-}
 
 int	handling_keyboard(int keycode, t_fractol *f)
 {
@@ -29,23 +22,20 @@ int	handling_keyboard(int keycode, t_fractol *f)
 	return (0);
 }
 
-
 int	handling_close_button(t_fractol *f)
 {
-	mlx_destroy_image(f->mlx, f->img.img);
-	mlx_destroy_window(f->mlx, f->win);
+	cleanup(f);
 	exit(0);
-	return (0);
 }
 
 int	handling_mouse(int button, int x, int y, t_fractol *f)
 {
+	(void)x;
+	(void)y;
 	if (button == 4)
-		zoom_at_point(f, x, y, 1.2);
+		f->zoom *= 1.2;
 	else if (button == 5)
-		zoom_at_point(f, x, y, 0.8);
-
+		f->zoom *= 0.8;
 	render(f);
 	return (0);
 }
-
