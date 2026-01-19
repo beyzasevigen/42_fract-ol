@@ -30,8 +30,9 @@ int main(int argc, char **argv)
     init_fractol(&f);
     render(&f);
 
-    mlx_hook(f.win, 2, 1L << 0, handle_key, &f);
-    mlx_hook(f.win, 17, 0, handle_close, &f);
+    mlx_hook(f.win, 2, 1L << 0, handling_keyboard, &f);
+    mlx_hook(f.win, 17, 0, handling_close_button, &f);
+    mlx_mouse_hook(f.win, handling_mouse, &f);
 
     mlx_loop(f.mlx);
     return (0);

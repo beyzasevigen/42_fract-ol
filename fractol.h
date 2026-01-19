@@ -47,7 +47,7 @@ void    render(t_fractol *f);
 
 int     handle_key(int keycode, t_fractol *f);
 int     handle_close(t_fractol *f);
-
+int	handling_mouse(int button, int x, int y, t_fractol *f);
 int     mandelbrot(double x, double y, t_fractol *f);
 int     julia(double x, double y, t_fractol *f);
 
