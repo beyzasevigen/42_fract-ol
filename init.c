@@ -18,6 +18,7 @@ static void	init_image(t_fractol *f)
 
 void	init_fractol(t_fractol *f)
 {
+	ft_bzero(f, sizeof(t_fractol));
 	f->mlx = mlx_init();
 	if (!f->mlx)
 		error_exit("mlx_init failed");
@@ -28,10 +29,11 @@ void	init_fractol(t_fractol *f)
 
 	init_image(f);
 
-
 	f->zoom = 1.0;
 	f->shift_x = 0.0;
 	f->shift_y = 0.0;
 	f->max_iter = 100;
 
+	f->fractal = NULL;
 }
+

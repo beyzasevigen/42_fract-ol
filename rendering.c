@@ -17,13 +17,6 @@ static void	pixel_to_complex(int x, int y, t_fractol *f,
 	*im = (y - HEIGHT / 2.0) / (0.5 * f->zoom * HEIGHT) + f->shift_y;
 }
 
-static int	get_color(int iter, int max_iter)
-{
-	if (iter == max_iter)
-		return (0x000000);
-	return (0x00FF00);
-}
-
 void	render(t_fractol *f)
 {
 	int		x;
@@ -33,6 +26,7 @@ void	render(t_fractol *f)
 	int		iter;
 
 	y = 0;
+	clear_image(&f->img);
 	while (y < HEIGHT)
 	{
 		x = 0;
@@ -40,8 +34,7 @@ void	render(t_fractol *f)
 		{
 			pixel_to_complex(x, y, f, &re, &im);
 			iter = f->fractal(re, im, f);
-put_pixel(&f->img, x, y, get_color(iter, f->max_iter));
-
+			put_pixel(&f->img, x, y, get_color(iter, f->max_iter));
 			x++;
 		}
 		y++;
